@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    background: url("../img/bg.png");
+}
+
+.barra-sup {
+    background: black;
+    width: 100%;
+    max-height: 40px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 0.625em;
+    text-align: center;
+    position: absolute;
+    padding: 8px ;
+    top: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: rgba(255, 255, 255, 1);
+    position: absolute;
+    height: 80px;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    box-shadow: 0px 0px 10px -1px black;
+}
+
+.nav {
+    display: flex;
+    justify-content:space-between;
+    font-family: sans-serif;
+}
+
+.nav-link {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+.logo {
+    font-size: 3em;
+    font-weight: bold;
+    padding: 0 40px;
+    line-height: 80px;
+    white-space: nowrap;
+}
+
+.nav-menu {
+    display: flex;
+    margin-right: 20px;
+    list-style: none;
+}
+
+.nav-menu-item {
+    font-size: clamp(2vh, 2.2vh, 2.2vh);
+    margin: 0 10px;
+    line-height: 80px;
+    width: max-content;
+}
+
+.nav-menu-link {
+    padding: 8px 12px;
+    border-radius: 3px;
+}
+
+.nav-menu-link:hover {
+    background-color: rgb(91, 91, 92);
+    transition: 0.25s;
+    color: white;
+}
+
+.frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.frame img {
+    position: relative;
+    width: 60%;
+    max-height: 600px;
+}
+
+h2 {
+    margin-top: -70px;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.categorias {
+    display: flex;
+    justify-content: center
+}
+
+.categorias-link {
+    line-height: 80px;
+    text-decoration: none;
+    color: black;
+    padding: 8px 7.5vw;
+    opacity: 1;
+    border-bottom: solid rgb(189, 189, 189) 2.5px;
+}
+
+.categorias-list {
+    list-style: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.categoria1:hover, .categoria2:hover, .categoria3:hover {
+    opacity: 1;
+    border-bottom: solid rgb(0, 0, 0) 2.5px;
+}
+
+.img-categoria {
+    display: flex;
+    gap: 3.5vw;
+    justify-content: center;
+    list-style: none;
+}
+
+.img-tamaño {
+    display: block;
+    width: 100%;
+    height: 200px;
+    max-width: 300px;
+    margin-bottom: 10vh;
+}
+
+/* css productos en catalogo */
+
+body {
+    font-size: 16px;
+}
+
+.producto {
+    width: 20em; 
+    margin: 3em; 
+    text-align: center; 
+    padding-top: 6em; 
+}
+
+.producto img {
+    width: 100%; 
+    height: auto; 
+}
+
+.producto h3 {
+    margin-top: 0.625em; 
+}
+
+.producto .precio {
+    color: rgb(0, 0, 0);
+    font-weight: bold; 
+}
+
+.btn-agregar {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.btn-agregar:hover {
+    background-color: #0056b3;
+}
