@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Biblioteca</title>
+    <link rel="stylesheet" href="{% static 'core/css/eventos.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</div>
+        <ul class="nav-links">
+            <li><a href="#about">Cátalogo</a></li>
+            <li><a href="#services">Horarios</a></li>
+            <li><a href="#contact">Acerca de nosotros</a></li>
+            <li><a href="#contact">Contacto</a></li>
+            <li><a href="#contact">Iniciar sesión</a></li>
+        </ul>
+        <div class="menu-toggle">☰</div>
+    </nav>
+<div class="img"></div>
+<div class="container">
+    <div class="card">
+            <img src="{% static 'core/assets/box1.jpg' %}" alt="">
+        <div class="contenido">
+            <h2>Fonda Peor es Nada</h3>
+            <h4>Entrada liberada</h2>
+            <h5>17, 18 y 19 de Septiembre</h1>
+        </div>
+    </div>
+    <div class="card">
+            <img src="{% static 'core/assets/box2.png' %}" alt="">
+        <div class="contenido">
+            <h2>Maratón Dieciochera</h3>
+            <h4>Inscripciones hasta 16/06/24</h2>
+            <h5>Sábado 21/09, 9:00 am.</h1>
+        </div>
+    </div>
+    <div class="card">
+            <img src="{% static 'core/assets/box3.png' %}" alt="">
+        <div class="contenido">
+            <h2>Dia mundial del libro</h3>
+            <h4>Entrada liberada</h2>
+            <h5>De 10:00 a 20:00</h1>
+        </div>
+    </div>
+</div>
+</body>
+</html>

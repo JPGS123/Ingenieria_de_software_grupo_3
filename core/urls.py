@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import index
+from .views import index, eventos
 
 urlpatterns = [
-    path('', index, name='index'),  # Esta línea mapea la URL raíz a la vista index_view
+    path('', index, name='index'),
+    path('eventos/', eventos, name='eventos'),
 ]
