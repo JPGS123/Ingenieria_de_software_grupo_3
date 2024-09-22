@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+}
+
+.titulo {
+    font-family: 'Newsreader';font-size: 22px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2C5364;
+    padding: 35px 20px;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #A2C2C0;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+body {
+    background: url("../assets/Chimbarongo.png");
+    background-repeat: no-repeat;
+    background-size: cover; /* Opcional: ajusta la imagen al tamaño del elemento */
+    height: 250px;
+    width: 100%;
+}
