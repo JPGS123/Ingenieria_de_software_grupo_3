@@ -3,7 +3,8 @@ body {
 }
 
 .titulo {
-    font-family: 'Newsreader';font-size: 22px;
+    font-family: 'Newsreader';
+    font-size: 30px;
 }
 .navbar {
     display: flex;
@@ -19,6 +20,8 @@ body {
     display: flex;
     margin: 0;
     padding: 0;
+    font-family: 'Newsreader';
+    font-size: 20px;
 }
 
 .nav-links li {
@@ -40,10 +43,24 @@ body {
     cursor: pointer;
 }
 
-body {
-    background: url("../assets/Chimbarongo.png");
-    background-repeat: no-repeat;
-    background-size: cover; /* Opcional: ajusta la imagen al tamaño del elemento */
-    height: 250px;
-    width: 100%;
+.img {
+    background-image: url('../assets/Chimbarongo.png');
+    background-size: cover; 
+    background-position: center ; 
+    height: 600px; 
+    width: 100%; 
+}
+
+.parrafo-index {
+    margin: 50px 600px 0px 600px ;
+    font-size: 40px;
+    color: #426B1F;
+    text-align: center;
+
+}
+
+.footer {
+    background-color: #2C5364;
+    padding: 60px;
+    margin-top: 132px;
 }
