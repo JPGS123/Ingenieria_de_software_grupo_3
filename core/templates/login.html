@@ -11,9 +11,17 @@
 
     <div class="login-container">
         <div class="form-container">
-            <h2>¡Bienvenido a la Biblioeteca Municipal de Chimbarongo
+            <h2>¡Bienvenido a la Biblioteca Municipal de Chimbarongo
                 Sucursal Peor es Nada!</h2>
-            <form class="form" action="/login" method="POST">
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <form class="form" action="{% url 'login_view' %}" method="POST">
+                {% csrf_token %}
                 <div class="input-field">
                     <label for="username">Usuario</label>
                     <input type="text" id="username" name="username" required placeholder="tucorreo@ejemplo.com">
@@ -25,10 +33,11 @@
                 <button type="submit" class="submit-button">Ingresar</button>
                 <hr>
                 <p>¿Aún no eres socio?</p>
-                <button type="submit" class="registro-button">Regístrate</button>
+                <a href="{% url 'register' %}" class="registro-button">Regístrate</a>
             </form>
+
             <div class="login-img">
-                <img src="{% static 'core/assets/loginlibrary.jpg' %}" alt=""> 
+                <img src="{% static 'core/assets/loginlibrary.jpg' %}" alt="Imagen de biblioteca"> 
             </div> 
         </div>
     </div>
