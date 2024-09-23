@@ -7,3 +7,6 @@ def index(request):
 
 def eventos(request):
     return render(request, 'eventos.html')
+
+def login(request):
+    return render(request, 'login.html')
