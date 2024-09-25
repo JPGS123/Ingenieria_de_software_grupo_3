@@ -74,20 +74,11 @@ WSGI_APPLICATION = 'biblioteca.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'g15a8c7ebe1c752_fg8vpvpr4mzbodza_high.adb.oraclecloud.com',
+        'NAME': 'fg8vpvpr4mzbodza_high',
         'USER': 'ADMIN',
         'PASSWORD': 'Biblioteca1234',
-        'HOST': 'adb.sa-santiago-1.oraclecloud.com',
-        'PORT': '1522',
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
     }
 }
-
-
-
-
 
 
 # Password validation

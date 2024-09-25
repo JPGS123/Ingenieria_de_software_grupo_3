@@ -19,15 +19,15 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        
+
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
             return redirect('index')
         else:
             messages.error(request, 'Usuario o contraseña incorrectos')
-    
-    return redirect('login_page')
+
+    return redirect('login')
 
 def register(request):
     if request.method == 'POST':

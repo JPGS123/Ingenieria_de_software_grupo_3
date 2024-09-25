@@ -62,7 +62,7 @@ a {
 
 
 .container {
-    margin: 100px auto 0px auto;
+    margin: 30px auto 0px auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -98,15 +98,17 @@ a {
 
 .card:hover {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2%);
+    transform: translateY(-5%);
 }
 
 .card-text {
     text-align: center;
-    width: 170px; /* Alinea el ancho del texto con el de la tarjeta */
+    width: 170px;
     margin-top: -10px;
     margin-bottom: 20px;
-    font-size: 14px;
+    font-size: 20px;
+    color: antiquewhite;
+
 }
 
 
@@ -121,9 +123,7 @@ a {
     margin: 0;
     display: flex;
     justify-content: center;
-    margin-left: -770px;
     margin-top: 50px;
-    margin-bottom: -100px;
 }
 
 .menu-horizontal li {
@@ -138,14 +138,93 @@ a {
     padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    background-color: antiquewhite;
 }
 
 .menu-horizontal a:hover {
-    background-color: #ddd;
+    background-color: #2C5364;
     color: #000;
 }
 
-h2 {
-    margin-left: 600px;
-    margin-bottom: -10px;
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../assets/catalogo.png');
+    background-size: cover;
+    background-position: center;
+
 }
+
+.sub-container {
+    display: flex;
+    align-items: center;
+    justify-content: column;
+    flex-direction: column;
+}
+
+h2 {
+    font-family:  "Lucida Console";
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+}
+.categorias {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: #2C5364;
+    height: 700px;
+}
+
+.card-categorias {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #f8f8ed;
+    cursor: default;
+    transition: all 400ms ease;
+    border: 3.5px solid rgb(165, 165, 165);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.5s;
+    background-size: cover;
+}
+
+
+
+.card-categorias:hover {
+    transform: translateX(0);
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-categorias:hover {
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+}
+
+.menu-horizontal li:nth-child(1) .card-categorias {
+    background-image: url("../assets/cfi.jpg");
+}
+
+.menu-horizontal li:nth-child(2) .card-categorias {
+    background-image: url("../assets/terror.jpg");
+}
+
+
+.menu-horizontal li:nth-child(3) .card-categorias {
+    background-image: url("../assets/novela.jpeg");
+}
+
+
+.menu-horizontal li:nth-child(4) .card-categorias {
+    background-image: url("../assets/niños.jpg");
+}
+
+
+

@@ -10,58 +10,95 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</div>
-        <ul class="nav-links">
-            <li><a href="#about">Cátalogo</a></li>
-            <li><a href="#services">Horarios</a></li>
-            <li><a href="{% url 'eventos' %}">Eventos</a></li>
-            <li><a href="#contact">Contacto</a></li>
-            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-        </ul>
-        <div class="menu-toggle">☰</div>
-    </nav>
+    
+        <nav class="navbar">
+            <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</div>
+            <ul class="nav-links">
+                <li><a href="#about">Cátalogo</a></li>
+                <li><a href="#services">Horarios</a></li>
+                <li><a href="{% url 'eventos' %}">Eventos</a></li>
+                <li><a href="#contact">Contacto</a></li>
+                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            </ul>
+            <div class="menu-toggle">☰</div>
+        </nav>
 
-    <h2>Libros disponibles</h2>
-    <ul class="menu-horizontal">
-        <li><a href="#">Novela</a></li>
-        <li><a href="#">Ciencia ficción</a></li>
-        <li><a href="#">Crimen</a></li>
-        <li><a href="#">Psicologia</a></li>
-    </ul>
-    <div class="container">
-        <div class="card-wrapper">
-            <div class="card">
-                <img src="#" alt="">
-            </div>
-            <p class="card-text">Nombre libro 1</p>
+    <div class="main-container">
+        <div class="sub-container">
+        <h2>Selección popular</h2>
         </div>
-        <div class="card-wrapper">
-            <div class="card">
-                <img src="#" alt="">
+        <div class="container">
+            <div class="card-wrapper">
+                <div class="card">
+                    <img src="#" alt="">
+                </div>
+                <p class="card-text">libro1</p>
             </div>
-            <p class="card-text">Nombre libro 2</p>
+            <div class="card-wrapper">
+                <div class="card">
+                    <img src="#" alt="">
+                </div>
+                <p class="card-text">libro2</p>
+            </div>
+            <div class="card-wrapper">
+                <div class="card">
+                    <img src="#" alt="">
+                </div>
+                <p class="card-text">libro3</p>
+            </div>
+            <div class="card-wrapper">
+                <div class="card">
+                    <img src="#" alt="">
+                </div>
+                <p class="card-text">libro4</p>
+            </div>
+            <div class="card-wrapper">
+                <div class="card">
+                    <img src="#" alt="">
+                </div>
+                <p class="card-text">libro5</p>
+            </div>
+            <div class="card-wrapper">
+                <div class="card">
+                    <img src="#" alt="">
+                </div>
+                <p class="card-text">libro6</p>
+            </div> 
         </div>
-        <div class="card-wrapper">
-            <div class="card">
-                <img src="#" alt="">
-            </div>
-            <p class="card-text">Nombre libro3</p>
-        </div>
-        <div class="card-wrapper">
-            <div class="card">
-                <img src="#" alt="">
-            </div>
-            <p class="card-text">Nombre libro4</p>
-        </div>
-        <div class="card-wrapper">
-            <div class="card">
-                <img src="#" alt="">
-            </div>
-            <p class="card-text">Nombre libro 5</p>
-        </div> 
     </div>
 
+    <div class="categorias">
+        <ul class="menu-horizontal">
+            <li>
+                <div class="card-wrapper">
+                    <a href="#">Ciencia ficción</a>
+                    <div class="card-categorias">
+                        <img src="#" alt="">
+                    </div>
+            </li>
+            <li>
+                <div class="card-wrapper">
+                    <a href="#">Terror</a>
+                    <div class="card-categorias">
+                        <img src="#" alt="">
+                    </div>
+            </li>
+            <li>
+                <div class="card-wrapper">
+                    <a href="#">Fantasia</a>
+                    <div class="card-categorias">
+                        <img src="#" alt="">
+                    </div>
+            </li>
+            <li>
+                <div class="card-wrapper">
+                    <a href="#">Cuentos</a>
+                    <div class="card-categorias">
+                        <img src="#" alt="">
+                    </div>
+            </li>
+        </ul>
+    </div>
 </body>
 
 </html>
