@@ -6,6 +6,9 @@ from django.contrib import messages
 def index(request):
     return render(request, 'index.html')
 
+def usuarioAdmin(request):
+    return render(request, 'usuario-admin.html')
+
 def eventos(request):
     return render(request, 'eventos.html')
 
