@@ -15,6 +15,9 @@ def login_page(request):
 def catalogo(request):
     return render(request, 'catalogo.html')
 
+def nosotros(request):
+    return render(request, 'nosotros.html')
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']

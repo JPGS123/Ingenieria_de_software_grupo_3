@@ -90,11 +90,90 @@ body {
 
 }
 
-h2 {
+.sub-container h2 {
     color: #426B1F;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+}
+
+.footer {
+    background-color: #2C5364;
+    margin-top: 132px;
+    height: 220px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+footer {
+    background-color: #2C5364;
+    color: white;
+    padding: 40px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 10px 20px;
+    min-width: 250px;
+}
+
+.footer-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-section p,
+.footer-section ul {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #A2C2C0;
+}
+
+.footer-bottom {
+    background-color: #1D2B36;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+.footer-bottom p {
+    margin: 0;
 }

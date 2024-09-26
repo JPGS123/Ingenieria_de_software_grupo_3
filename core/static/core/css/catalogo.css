@@ -123,8 +123,16 @@ a {
     margin: 0;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 80px;
 }
+
+.categorias h1 {
+    position: absolute;
+    font-family:  "Lucida Console";
+    color: #2C5364;
+    font-size: 50px;
+}
+
 
 .menu-horizontal li {
     margin: 0 5px;
@@ -138,11 +146,11 @@ a {
     padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    background-color: antiquewhite;
+
 }
 
 .menu-horizontal a:hover {
-    background-color: #2C5364;
+    background-color: antiquewhite;
     color: #000;
 }
 
@@ -173,39 +181,41 @@ h2 {
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
-    background-color: #2C5364;
-    height: 700px;
+    height: 500px;
 }
 
 .card-categorias {
-    width: 200px;
-    height: 200px;
-    margin: 20px;
-    border-radius: 15px;
+    width: 120px;
+    height: 350px;
+    margin: 5px;
+    border-radius: 100px;
     overflow: hidden;
     background: #f8f8ed;
     cursor: default;
     transition: all 400ms ease;
-    border: 3.5px solid rgb(165, 165, 165);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     transition: 0.5s;
     background-size: cover;
 }
 
+.card-categorias a {
+    font-family: "Lucida Console", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    margin: 0;
+    padding: 10px;
+}
 
 
 .card-categorias:hover {
     transform: translateX(0);
     transform: translateY(0);
     opacity: 1;
-}
-
-.card-categorias:hover {
     width: 300px;
-    height: 300px;
-    cursor: pointer;
 }
 
 .menu-horizontal li:nth-child(1) .card-categorias {
@@ -226,5 +236,84 @@ h2 {
     background-image: url("../assets/niños.jpg");
 }
 
+
+.footer {
+    background-color: #2C5364;
+    margin-top: 132px;
+    height: 220px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+footer {
+    background-color: #2C5364;
+    color: white;
+    padding: 40px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 10px 20px;
+    min-width: 250px;
+}
+
+.footer-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-section p,
+.footer-section ul {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #A2C2C0;
+}
+
+.footer-bottom {
+    background-color: #1D2B36;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
 
 

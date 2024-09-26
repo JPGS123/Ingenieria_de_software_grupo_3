@@ -14,10 +14,9 @@
         <nav class="navbar">
             <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</div>
             <ul class="nav-links">
-                <li><a href="#about">Cátalogo</a></li>
-                <li><a href="#services">Horarios</a></li>
+                <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
                 <li><a href="{% url 'eventos' %}">Eventos</a></li>
-                <li><a href="#contact">Contacto</a></li>
+                <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
                 <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
             </ul>
             <div class="menu-toggle">☰</div>
@@ -46,59 +45,74 @@
                 </div>
                 <p class="card-text">libro3</p>
             </div>
-            <div class="card-wrapper">
-                <div class="card">
-                    <img src="#" alt="">
-                </div>
-                <p class="card-text">libro4</p>
-            </div>
-            <div class="card-wrapper">
-                <div class="card">
-                    <img src="#" alt="">
-                </div>
-                <p class="card-text">libro5</p>
-            </div>
-            <div class="card-wrapper">
-                <div class="card">
-                    <img src="#" alt="">
-                </div>
-                <p class="card-text">libro6</p>
             </div> 
         </div>
     </div>
 
     <div class="categorias">
+        <h1>Categoría</h1>
         <ul class="menu-horizontal">
             <li>
                 <div class="card-wrapper">
-                    <a href="#">Ciencia ficción</a>
                     <div class="card-categorias">
+                        <a href="#">Ciencia ficción</a>
                         <img src="#" alt="">
                     </div>
             </li>
             <li>
                 <div class="card-wrapper">
-                    <a href="#">Terror</a>
                     <div class="card-categorias">
+                        <a href="#">Terror</a>
+                        <img src="#" alt="">
+                    </div>
+            </li>
+            <li>
+                <div class="card-wrapper"> 
+                    <div class="card-categorias">
+                        <a href="#">Fantasia</a>
                         <img src="#" alt="">
                     </div>
             </li>
             <li>
                 <div class="card-wrapper">
-                    <a href="#">Fantasia</a>
                     <div class="card-categorias">
-                        <img src="#" alt="">
-                    </div>
-            </li>
-            <li>
-                <div class="card-wrapper">
-                    <a href="#">Cuentos</a>
-                    <div class="card-categorias">
+                        <a href="#">Cuentos</a>
                         <img src="#" alt="">
                     </div>
             </li>
         </ul>
     </div>
 </body>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h2>Sobre Nosotros</h2>
+            <p>Somos una biblioteca municipal dedicada a promover la lectura y la cultura. Ofrecemos una amplia variedad de libros y recursos para toda la comunidad.</p>
+        </div>
+
+        <div class="footer-section links">
+            <h2>Enlaces Rápidos</h2>
+            <ul>
+                <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
+                <li><a href="{% url 'eventos' %}">Eventos</a></li>
+                <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section social">
+            <h2>Nuestro Horario</h2>
+            <ul>
+                <p>Lunes 10:00 AM - 17:45 PM</p>
+                <p>Martes a Viernes 9:00 AM - 17:45 PM</p>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 Biblioteca Municipal de Chimbarongo - Sede Peor es Nada | Todos los derechos reservados.</p>
+    </div>
+</footer>
 
 </html>

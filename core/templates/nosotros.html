@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Biblioteca</title>
-    <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/nosotros.css' %}">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         <ul class="nav-links">
             <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
             <li><a href="{% url 'eventos' %}">Eventos</a></li>
-            <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+            <li><a href="#contact">Nosotros</a></li>
             <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
         </ul>
         <div class="menu-toggle">☰</div>
@@ -23,11 +23,27 @@
 
     <div class="img"></div>
 
-    <p class= "parrafo-index">¡Bienvenido al sitio web de la Biblioteca Municipal de Chimbarongo, sucursal Peor es Nada!
-        Aquí encontrarás toda la información relevante sobre nuestro catálogo, los eventos y actividades
-        a realizar en nuestras dependencias, otros eventos que municipales que tengan lugar en Peor es Nada,
-        nuestros horarios de atención y todos los canales necesarios para contactarnos.
-        ¡Te esperamos!</p>
+    <section>
+        <div class="main-container">
+            <div class="texto">
+                <h1>Centro bibliotecario</h1>
+                <h2>Sede Peor es Nada</h2>
+                <p>
+                    El Centro Bibliotecario - Sede Peor es Nada es una parte integral del sistema de bibliotecas públicas y escolares de la Corporación Municipal de Educación, Salud y Atención de Menores de Puente Alto. Nuestra misión es ofrecer a la comunidad un amplio acceso al libro, la lectura, la información y las tecnologías de la información y la comunicación, con el objetivo de fomentar una cultura de lectura en nuestra localidad.
+                </p>
+                <ul>
+                    <li>Promover la lectura desde la primera infancia y a lo largo de toda la vida en Sede Peor es Nada.</li>
+                    <li>Proporcionar acceso gratuito y extenso a libros y recursos de lectura en toda la comunidad.</li>
+                    <li>Incorporar la mediación de la lectura en todas nuestras actividades, estableciendo una base sólida para todos los aprendizajes.</li>
+                    <li>Facilitar el acceso al gobierno digital mediante el uso de tecnologías de información y comunicación, con el fin de reducir la brecha digital.</li>
+                    <li>Ofrecer un espacio acogedor y accesible para la comunidad en todas nuestras instalaciones.</li>
+                    <li>Impulsar la inclusión, la movilidad social y fomentar oportunidades de desarrollo local para mejorar la calidad de vida de todos nuestros habitantes.</li>
+                </ul>
+            </div>
+            <img src="{% static 'core/assets/peoresnada.png' %}" alt="peoresnada" class="imagen">
+        </div>
+    </section>
+
 
     <footer class="footer">
         <div class="footer-container">
