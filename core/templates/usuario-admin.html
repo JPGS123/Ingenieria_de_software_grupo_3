@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,6 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración - Biblioteca</title>
     <link rel="stylesheet" href="{% static 'core/css/usuario-admin.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/modal.css' %}">
+    <style>
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+        }
+
+        #addBookModal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .close {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="sidebar">
@@ -20,7 +47,7 @@
     <div class="main-content">
         <header>
             <h1>Lista de Libros</h1>
-            <a href="#" class="btn">Agregar Nuevo Libro</a>
+            <button class="btn" id="addBookBtn">Agregar Nuevo Libro</button>
         </header>
         
         <table>
@@ -30,33 +57,179 @@
                     <th>Autor</th>
                     <th>Año de Publicación</th>
                     <th>Precio</th>
+                    <th>Copias</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
+                {% for libro in libros %}
                 <tr>
-                    <td>El Principito</td>
-                    <td>Antoine de Saint-Exupéry</td>
-                    <td>1943</td>
-                    <td>$15.00</td>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.autor }}</td>
+                    <td>{{ libro.año_publicacion }}</td>
+                    <td>${{ libro.precio }}</td>
+                    <td>{{ libro.copias }}</td>
                     <td>
-                        <a href="#" class="btn">Editar</a>
-                        <a href="#" class="btn eliminar">Eliminar</a>
+                        <a href="#" class="btn" onclick="openEditModal()">Editar</a>
+                        <a href="#" class="btn eliminar" data-id="{{ libro.id_libro }}">Eliminar</a>
                     </td>
                 </tr>
+                {% empty %}
                 <tr>
-                    <td>Cien Años de Soledad</td>
-                    <td>Gabriel García Márquez</td>
-                    <td>1967</td>
-                    <td>$20.00</td>
-                    <td>
-                        <a href="#" class="btn">Editar</a>
-                        <a href="#" class="btn eliminar">Eliminar</a>
-                    </td>
+                    <td colspan="6">No hay libros disponibles.</td>
                 </tr>
-                <!-- Más filas de libros -->
+                {% endfor %}
             </tbody>
         </table>
     </div>
+
+    <div id="addBookModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Agregar Nuevo Libro</h2>
+            <form id="addBookForm" method="post">
+                {% csrf_token %}
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+                <label for="autor">Autor:</label>
+                <input type="text" id="autor" name="autor" required>
+                <label for="año_publicacion">Año de Publicación:</label>
+                <input type="number" id="año_publicacion" name="año_publicacion" required>
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" required step="0.01">
+                <label for="copias">Copias:</label>
+                <input type="number" id="copias" name="copias" required>
+                <button type="submit">Agregar Libro</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editBookModal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Editar Libro</h2>
+            <form id="editBookForm" method="post">
+                {% csrf_token %}
+                <input type="hidden" id="edit_libro_id" name="libro_id">
+                <label for="edit_titulo">Título:</label>
+                <input type="text" id="edit_titulo" name="titulo" required>
+                <label for="edit_autor">Autor:</label>
+                <input type="text" id="edit_autor" name="autor" required>
+                <label for="edit_año_publicacion">Año de Publicación:</label>
+                <input type="number" id="edit_año_publicacion" name="año_publicacion" required>
+                <label for="edit_precio">Precio:</label>
+                <input type="number" id="edit_precio" name="precio" required step="0.01">
+                <label for="edit_copias">Copias:</label>
+                <input type="number" id="edit_copias" name="copias" required>
+                <button type="submit">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('addBookBtn').onclick = function() {
+            document.getElementById('addBookModal').style.display = 'block';
+        }
+
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('addBookModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('addBookModal')) {
+                document.getElementById('addBookModal').style.display = 'none';
+            }
+        }
+
+        document.getElementById('addBookForm').onsubmit = function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            fetch('/agregar-libro/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': csrfToken
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Libro agregado correctamente');
+                    location.reload();
+                } else {
+                    alert('Error al agregar el libro');
+                }
+            });
+        }
+
+        document.querySelectorAll('.eliminar').forEach(button => {
+            button.onclick = function(event) {
+                event.preventDefault();
+                const libroId = this.getAttribute('data-id');
+
+                if (confirm('¿Estás seguro de que deseas eliminar este libro?')) {
+                    fetch(`/eliminar-libro/${libroId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Libro eliminado correctamente');
+                            location.reload();
+                        } else {
+                            response.json().then(data => {
+                                alert(`Error al eliminar el libro: ${data.message}`);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        alert('Error al realizar la solicitud: ' + error);
+                    });
+                }
+            };
+        });
+    </script>
+
+<script>
+    function openEditModal() {
+        document.getElementById('edit_libro_id').value = '';
+        document.getElementById('edit_titulo').value = '';
+        document.getElementById('edit_autor').value = '';
+        document.getElementById('edit_año_publicacion').value = '';
+        document.getElementById('edit_precio').value = '';
+        document.getElementById('edit_copias').value = '';
+        document.getElementById('editBookModal').style.display = 'block';
+    }
+
+    function closeEditModal() {
+        document.getElementById('editBookModal').style.display = 'none';
+    }
+
+    document.getElementById('editBookForm').onsubmit = function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        fetch('/editar-libro/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Libro actualizado correctamente');
+                location.reload();
+            } else {
+                alert('Error al actualizar el libro');
+            }
+        });
+    }
+</script>
+
 </body>
 </html>

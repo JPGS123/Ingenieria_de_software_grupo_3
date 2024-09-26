@@ -1,13 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .models import Libro
+from django.http import JsonResponse
 
 def index(request):
     return render(request, 'index.html')
-
-def usuarioAdmin(request):
-    return render(request, 'usuario-admin.html')
 
 def eventos(request):
     return render(request, 'eventos.html')
@@ -59,3 +58,33 @@ def register(request):
         return redirect('login_page')
 
     return render(request, 'register.html')
+
+def usuarioAdmin(request):
+    libros = Libro.objects.all()
+    return render(request, 'usuario-admin.html', {'libros': libros})
+
+def agregar_libro(request):
+    if request.method == 'POST':
+        titulo = request.POST.get('titulo')
+        autor = request.POST.get('autor')
+        año_publicacion = request.POST.get('año_publicacion')
+        precio = request.POST.get('precio')
+        copias = request.POST.get('copias')
+
+        try:
+            libro = Libro(titulo=titulo, autor=autor, año_publicacion=año_publicacion, precio=precio, copias=copias)
+            libro.save()
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
+
+def eliminar_libro(request, id_libro):
+    if request.method == 'POST':
+        try:
+            libro = Libro.objects.get(id_libro=id_libro)
+            libro.delete()
+            return JsonResponse({'status': 'success'})
+        except Libro.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Libro no encontrado'}, status=404)
+    return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
