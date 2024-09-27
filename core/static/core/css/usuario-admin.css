@@ -123,13 +123,13 @@ table tbody tr:hover {
 }
 
 .modal-content h2 {
-    text-align: left; /* Alineación para el título */
+    text-align: left;
 }
 
 .modal-content label {
-    display: block; /* Asegúrate de que cada etiqueta esté en su propia línea */
-    margin: 10px 0 5px; /* Espaciado alrededor de las etiquetas */
-    text-align: left; /* Alineación para las etiquetas */
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
 }
 
 .modal-content input {
