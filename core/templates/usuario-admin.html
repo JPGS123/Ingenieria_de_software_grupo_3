@@ -6,41 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración - Biblioteca</title>
-    <link rel="stylesheet" href="{% static 'core/css/usuario-admin.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/modal.css' %}">
-    <style>
-        .modal-content {
-            background-color: white;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 300px;
-        }
-
-        #addBookModal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .close {
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'core/css/usuario-admin.css' %}">    
 </head>
+
 <body>
     <div class="sidebar">
         <h2>Panel de Administración</h2>
         <ul>
             <li><a href="#">Libros</a></li>
             <li><a href="#">Arriendos</a></li>
-            <li><a href="#">Usuarios</a></li>
         </ul>
     </div>
     
@@ -70,7 +44,7 @@
                     <td>${{ libro.precio }}</td>
                     <td>{{ libro.copias }}</td>
                     <td>
-                        <a href="#" class="btn" onclick="openEditModal()">Editar</a>
+                        <a href="#" class="btn" onclick="openEditModal('{{ libro.id_libro }}', '{{ libro.titulo }}', '{{ libro.autor }}', '{{ libro.año_publicacion }}', '{{ libro.precio }}', '{{ libro.copias }}')">Editar</a>
                         <a href="#" class="btn eliminar" data-id="{{ libro.id_libro }}">Eliminar</a>
                     </td>
                 </tr>
@@ -194,13 +168,13 @@
     </script>
 
 <script>
-    function openEditModal() {
-        document.getElementById('edit_libro_id').value = '';
-        document.getElementById('edit_titulo').value = '';
-        document.getElementById('edit_autor').value = '';
-        document.getElementById('edit_año_publicacion').value = '';
-        document.getElementById('edit_precio').value = '';
-        document.getElementById('edit_copias').value = '';
+    function openEditModal(id, titulo, autor, año_publicacion, precio, copias) {
+        document.getElementById('edit_libro_id').value = id;
+        document.getElementById('edit_titulo').value = titulo;
+        document.getElementById('edit_autor').value = autor;
+        document.getElementById('edit_año_publicacion').value = año_publicacion;
+        document.getElementById('edit_precio').value = precio;
+        document.getElementById('edit_copias').value = copias;
         document.getElementById('editBookModal').style.display = 'block';
     }
 
@@ -229,7 +203,35 @@
             }
         });
     }
-</script>
 
+    document.getElementById('editBookForm').onsubmit = function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    fetch('/editar-libro/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': csrfToken
+        }
+    })
+    .then(response => {
+        console.log(response);
+        if (response.ok) {
+            alert('Libro actualizado correctamente');
+            location.reload();
+        } else {
+            response.json().then(data => {
+                alert('Error al actualizar el libro: ' + data.message);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error);
+        alert('Error al realizar la solicitud: ' + error);
+    });
+}
+</script>
 </body>
 </html>

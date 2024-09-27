@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Biblioteca</title>
+    <link rel="stylesheet" href="{% static 'core/css/fantasia.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
+            <li><a href="{% url 'eventos' %}">Eventos</a></li>
+            <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+        </ul>
+        <div class="menu-toggle">☰</div>
+    </nav>
+<div class="img"></div>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Fantasía</h2>
+        <h1>Categorias:</h1>
+        <a href="{% url 'ciencia-ficcion' %}">Ciencia Ficción</a>
+        <a href="{% url 'terror' %}">Terror</a>
+        <a href="{% url 'cuentos' %}">Cuentos</a>
+    </div>
+
+    <div class="content">
+        <div class="card">
+            <h3>Imagen de Libros</h3>
+            <img src="{% static 'core/images/libro-ejemplo.jpg' %}" alt="Libro Ejemplo"> <!-- Asegúrate de cambiar la ruta de la imagen -->
+            <p>Descripción del libro aquí.</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h2>Sobre Nosotros</h2>
+            <p>Somos una biblioteca municipal dedicada a promover la lectura y la cultura. Ofrecemos una amplia variedad de libros y recursos para toda la comunidad.</p>
+        </div>
+
+        <div class="footer-section links">
+            <h2>Enlaces Rápidos</h2>
+            <ul>
+                <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
+                <li><a href="{% url 'eventos' %}">Eventos</a></li>
+                <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section social">
+            <h2>Nuestro Horario</h2>
+            <ul>
+                <p>Lunes 10:00 AM - 17:45 PM</p>
+                <p>Martes a Viernes 9:00 AM - 17:45 PM</p>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 Biblioteca Municipal de Chimbarongo - Sede Peor es Nada | Todos los derechos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>

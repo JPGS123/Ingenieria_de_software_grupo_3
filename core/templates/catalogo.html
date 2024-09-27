@@ -29,21 +29,21 @@
         <div class="container">
             <div class="card-wrapper">
                 <div class="card">
-                    <img src="#" alt="">
+                    <img src="{% static 'core/assets/lord.png' %}" alt="">
                 </div>
-                <p class="card-text">libro1</p>
+                <p class="card-text">El Señor de los Anillos: la Comunidad del Anillo</p>
             </div>
             <div class="card-wrapper">
                 <div class="card">
-                    <img src="#" alt="">
+                    <img src="{% static 'core/assets/it.png' %}" alt="">
                 </div>
-                <p class="card-text">libro2</p>
+                <p class="card-text">It</p>
             </div>
             <div class="card-wrapper">
                 <div class="card">
-                    <img src="#" alt="">
+                    <img src="{% static 'core/assets/quijote.png' %}" alt="">
                 </div>
-                <p class="card-text">libro3</p>
+                <p class="card-text">Don Quijote de la Mancha</p>
             </div>
             </div> 
         </div>
@@ -55,28 +55,28 @@
             <li>
                 <div class="card-wrapper">
                     <div class="card-categorias">
-                        <a href="#">Ciencia ficción</a>
+                        <a href="{% url 'ciencia-ficcion' %}">Ciencia ficción</a>
                         <img src="#" alt="">
                     </div>
             </li>
             <li>
                 <div class="card-wrapper">
                     <div class="card-categorias">
-                        <a href="#">Terror</a>
+                        <a href="{% url 'terror' %}">Terror</a>
                         <img src="#" alt="">
                     </div>
             </li>
             <li>
                 <div class="card-wrapper"> 
                     <div class="card-categorias">
-                        <a href="#">Fantasia</a>
+                        <a href="{% url 'fantasia' %}">Fantasia</a>
                         <img src="#" alt="">
                     </div>
             </li>
             <li>
                 <div class="card-wrapper">
                     <div class="card-categorias">
-                        <a href="#">Cuentos</a>
+                        <a href="{% url 'cuentos' %}">Cuentos</a>
                         <img src="#" alt="">
                     </div>
             </li>

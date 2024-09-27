@@ -8,6 +8,18 @@ from django.http import JsonResponse
 def index(request):
     return render(request, 'index.html')
 
+def fantasia(request):
+    return render(request, 'fantasia.html')
+
+def terror(request):
+    return render(request, 'terror.html')
+
+def cuentos(request):
+    return render(request, 'cuentos.html')
+
+def cienciaFiccion(request):
+    return render(request, 'ciencia-ficcion.html')
+
 def eventos(request):
     return render(request, 'eventos.html')
 
@@ -55,7 +67,7 @@ def register(request):
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
         messages.success(request, 'Usuario registrado correctamente.')
-        return redirect('login_page')
+        return redirect('login')
 
     return render(request, 'register.html')
 
@@ -88,3 +100,16 @@ def eliminar_libro(request, id_libro):
         except Libro.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'Libro no encontrado'}, status=404)
     return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
+
+def editar_libro(request):
+    if request.method == 'POST':
+        libro_id = request.POST.get('libro_id')
+        libro = get_object_or_404(Libro, id_libro=libro_id)
+        libro.titulo = request.POST.get('titulo')
+        libro.autor = request.POST.get('autor')
+        libro.año_publicacion = request.POST.get('año_publicacion')
+        libro.precio = request.POST.get('precio')
+        libro.copias = request.POST.get('copias')
+        libro.save()
+        return JsonResponse({'message': 'Libro actualizado correctamente.'})
+    return JsonResponse({'message': 'Método no permitido.'}, status=405)
