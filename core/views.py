@@ -6,6 +6,8 @@ from .models import Libro, Categoria
 from django.http import JsonResponse
 from django.contrib.auth import logout
 
+
+
 def index(request):
     return render(request, 'index.html')
 
