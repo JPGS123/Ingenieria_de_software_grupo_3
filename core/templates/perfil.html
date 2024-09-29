@@ -18,14 +18,13 @@
             <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
             {% if user.is_authenticated %}
             {% if user.is_superuser %}
-                <li><a href="{% url 'usuario-admin' %}">Panel administrador</a></li>
-            {% else %}
-                <li><a href="{% url 'perfil' %}">Perfil</a></li>
+                <li><a href="{% url 'usuario-admin' %}">Admin Panel</a></li>
             {% endif %}
-                <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
-            {% else %}
-                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-            {% endif %}
+            <li><a href="{% url 'perfil' %}">Perfil</a></li>
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+        {% endif %}
         </ul>
         <div class="menu-toggle">☰</div>
     </nav>

@@ -1,12 +1,16 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Libro, Categoria
 from django.http import JsonResponse
+from django.contrib.auth import logout
 
 def index(request):
     return render(request, 'index.html')
+
+def perfil(request):
+    return render(request, 'perfil.html')
 
 def fantasia(request):
     return render(request, 'fantasia.html')
@@ -185,3 +189,8 @@ def eliminar_categoria(request, id):
     categoria = Categoria.objects.get(id=id)
     categoria.delete()
     return redirect('lista_categorias')
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Sesión cerrada con éxito')
+    return redirect('index')
