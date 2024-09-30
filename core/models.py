@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Categoria(models.Model):
@@ -27,6 +28,16 @@ class Libro(models.Model):
     def __str__(self):
         return self.titulo
     
+
+
+class Arriendo(models.Model):
+    id_arriendo = models.AutoField(primary_key=True)
+    libro = models.ForeignKey(Libro, on_delete=models.CASCADE, db_column='ID_LIBRO')
+    fecha_arriendo = models.DateTimeField(auto_now_add=True, db_column='FECHA_ARRIENDO')
+    fecha_devolucion = models.DateTimeField(null=True, blank=True, db_column='FECHA_DEVOLUCION')
+
+    class Meta:
+        db_table = 'ARRIENDOS'
 
 
 

@@ -15,7 +15,14 @@
             <p><strong>Nombre:</strong> {{ user.username }}</p>
             <p><strong>Teléfono:</strong> {{ user.first_name }}</p>
             <p><strong>Correo:</strong> {{ user.email }}</p>
-            <p><strong>Libros arrendados:</strong> {{ user.libro }}</p>
+            <h2>Libros arrendados:</h2>
+            <ul>
+                {% for arriendo in arriendos %}
+                    <li>{{ arriendo.libro.titulo }} (Arrendado el: {{ arriendo.fecha_arriendo }})</li>
+                {% empty %}
+                    <li>No has arrendado ningún libro.</li>
+                {% endfor %}
+            </ul>
         </div>
         <a href="{% url 'index' %}">Volver a la página de inicio</a>
     </div>
