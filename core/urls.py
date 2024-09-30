@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import usuarioAdmin, index, eventos, login_page, login_view, catalogo, register, nosotros, usuarioAdmin, agregar_libro, eliminar_libro, editar_libro, cienciaFiccion, fantasia, terror, cuentos, lista_categorias, agregar_categoria, editar_categoria, eliminar_categoria, logout_view, perfil
+from .views import usuarioAdmin, index, eventos, login_page, login_view, catalogo, register, nosotros, usuarioAdmin, agregar_libro, eliminar_libro, editar_libro, cienciaFiccion, fantasia, terror, cuentos, lista_categorias, agregar_categoria, editar_categoria, eliminar_categoria, logout_view, perfil, arrendar_libro
 
 urlpatterns = [
     path('', index, name='index'),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('categorias/eliminar/<int:id>/', eliminar_categoria, name='eliminar_categoria'),
     path('logout/', logout_view, name='logout'),
     path('perfil/', perfil, name='perfil'),
+    path('arrendar/<int:id_libro>/', arrendar_libro, name='arrendar_libro'),
 ]
