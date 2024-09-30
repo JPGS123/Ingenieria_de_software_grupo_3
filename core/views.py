@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -13,9 +13,6 @@ def index(request):
 
 def perfil(request):
     return render(request, 'perfil.html')
-
-def fantasia(request):
-    return render(request, 'fantasia.html')
 
 def terror(request):
     return render(request, 'terror.html')
@@ -198,7 +195,26 @@ def eliminar_categoria(request, id):
     categoria.delete()
     return redirect('lista_categorias')
 
+def fantasia(request):
+    libros = Libro.objects.filter(id_categoria_id=4)
+    return render(request, 'fantasia.html', {'libros': libros})
+
 def logout_view(request):
     logout(request)
     messages.success(request, 'Sesión cerrada con éxito')
     return redirect('index')
+
+def arrendar_libro(request, id_libro):
+    libro = get_object_or_404(Libro, id_libro=id_libro)
+
+    if libro.copias > 0:
+        libro.copias -= 1 
+        libro.save()
+        messages.success(request, 'Libro arrendado con éxito.')
+    else:
+        messages.error(request, 'No hay libros disponibles.')
+
+    return redirect('fantasia')
+
+
+

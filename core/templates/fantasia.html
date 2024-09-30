@@ -5,14 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Biblioteca</title>
+    <title>Fantasía - Biblioteca</title>
     <link rel="stylesheet" href="{% static 'core/css/fantasia.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</div>
+        <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</a></div>
         <ul class="nav-links">
             <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
             <li><a href="{% url 'eventos' %}">Eventos</a></li>
@@ -21,106 +21,75 @@
         </ul>
         <div class="menu-toggle">☰</div>
     </nav>
-<div class="img"></div>
+    <div class="img"></div>
 
-<div class="container">
-    <div class="sidebar">
-        <h2>Fantasía</h2>
-        <h1>Categorias:</h1>
-        <a href="{% url 'ciencia-ficcion' %}">Ciencia Ficción</a>
-        <a href="{% url 'terror' %}">Terror</a>
-        <a href="{% url 'cuentos' %}">Cuentos</a>
-    </div>
+    <div class="container">
+        {% if messages %}
+            <div class="messages">
+                <ul>
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
 
-    <div class="content">
-        <div class="card-container">
-            <div class="card">
-                <img src="{% static 'core/assets/espadas.jpg' %}" alt="Libro Ejemplo">
+        <div class="sidebar">
+            <h2>Fantasía</h2>
+            <h1>Categorías:</h1>
+            <a href="{% url 'ciencia-ficcion' %}">Ciencia Ficción</a>
+            <a href="{% url 'terror' %}">Terror</a>
+            <a href="{% url 'cuentos' %}">Cuentos</a>
+        </div>
+
+        <div class="content">
+            {% for libro in libros %}
+            <div class="card-container">
+                <div class="card">
+                    <img src="{% static 'core/assets/espadas.jpg' %}" alt="{{ libro.titulo }}">
+                </div>
+                <div class="leyenda">
+                    <p>{{ libro.titulo }}</p>
+                </div>
+                <a href="{% url 'arrendar_libro' id_libro=libro.id_libro %}">
+                    <button>Arrendar</button>
+                </a>                
             </div>
-            <div class="leyenda">
-                <p>Tormenta de espadas</p>
-            </div>
-            <button>Arrendar</button>
+            {% empty %}
+            <p>No hay libros disponibles en la categoría de Fantasía.</p>
+            {% endfor %}
         </div>
     </div>
 
-    <div class="content">
-        <div class="card-container">
-            <div class="card">
-                <img src="{% static 'core/assets/viento.jpg' %}" alt="Libro Ejemplo">
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h2>Sobre Nosotros</h2>
+                <p>Somos una biblioteca municipal dedicada a promover la lectura y la cultura. Ofrecemos una amplia variedad de libros y recursos para toda la comunidad.</p>
             </div>
-            <div class="leyenda">
-                <p>Hombre de viento</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="content">
-        <div class="card-container">
-            <div class="card">
-                <img src="{% static 'core/assets/got.jpg' %}" alt="Libro Ejemplo">
+            <div class="footer-section links">
+                <h2>Enlaces Rápidos</h2>
+                <ul>
+                    <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
+                    <li><a href="{% url 'eventos' %}">Eventos</a></li>
+                    <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                </ul>
             </div>
-            <div class="leyenda">
-                <p>Juego de tronos</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="content">
-        <div class="card-container">
-            <div class="card">
-                <img src="{% static 'core/assets/hobbit.jpg' %}" alt="Libro Ejemplo">
-            </div>
-            <div class="leyenda">
-                <p>El hobbit</p>
+            <div class="footer-section social">
+                <h2>Nuestro Horario</h2>
+                <ul>
+                    <p>Lunes 10:00 AM - 17:45 PM</p>
+                    <p>Martes a Viernes 9:00 AM - 17:45 PM</p>
+                </ul>
             </div>
         </div>
-    </div>
 
-    <div class="content">
-        <div class="card-container">
-            <div class="card">
-                <img src="{% static 'core/assets/lord.png' %}" alt="Libro Ejemplo">
-            </div>
-            <div class="leyenda">
-                <p>El señor de los anillos</p>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Biblioteca Municipal de Chimbarongo - Sede Peor es Nada | Todos los derechos reservados.</p>
         </div>
-    </div>
-</div>
-
-
-
-
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-section about">
-            <h2>Sobre Nosotros</h2>
-            <p>Somos una biblioteca municipal dedicada a promover la lectura y la cultura. Ofrecemos una amplia variedad de libros y recursos para toda la comunidad.</p>
-        </div>
-
-        <div class="footer-section links">
-            <h2>Enlaces Rápidos</h2>
-            <ul>
-                <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
-                <li><a href="{% url 'eventos' %}">Eventos</a></li>
-                <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-section social">
-            <h2>Nuestro Horario</h2>
-            <ul>
-                <p>Lunes 10:00 AM - 17:45 PM</p>
-                <p>Martes a Viernes 9:00 AM - 17:45 PM</p>
-            </ul>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <p>&copy; 2024 Biblioteca Municipal de Chimbarongo - Sede Peor es Nada | Todos los derechos reservados.</p>
-    </div>
-</footer>
+    </footer>
 </body>
 </html>
