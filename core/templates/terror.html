@@ -8,6 +8,20 @@
     <title>Home - Biblioteca</title>
     <link rel="stylesheet" href="{% static 'core/css/terror.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script>
+        function closeMessages() {
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.style.display = 'none';
+}
+
+
+window.onclick = function(event) {
+    const messageContainer = document.getElementById('messageContainer');
+    if (event.target === messageContainer) {
+        closeMessages();
+    }
+}
+    </script>
 </head>
 
 <body>
@@ -33,6 +47,7 @@
     
     <div class="img"></div>
 
+<<<<<<< HEAD
     <div class="container">
         <div class="sidebar">
             <h2>Terror</h2>
@@ -40,6 +55,75 @@
             <a href="{% url 'ciencia-ficcion' %}">Ciencia Ficción</a>
             <a href="{% url 'cuentos' %}">Cuentos</a>
             <a href="{% url 'fantasia' %}">Fantasía</a>
+=======
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Terror</h2>
+        <h1>Categorias:</h1>
+        <a href="{% url 'ciencia-ficcion' %}">Ciencia Ficción</a>
+        <a href="{% url 'cuentos' %}">Cuentos</a>
+        <a href="{% url 'fantasia' %}">Fantasía</a>
+    </div>
+
+    <div class="content">
+        <div class="card-container">
+            <div class="card">
+                <img src="{% static 'core/assets/it.jpg' %}" alt="Libro Ejemplo">
+            </div>
+            <div class="leyenda">
+                <p>It</p>
+            </div>
+            <button>Arrendar</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="card-container">
+            <div class="card">
+                <img src="{% static 'core/assets/dracula.jpg' %}" alt="Libro Ejemplo">
+            </div>
+            <div class="leyenda">
+                <p>Dracula</p>
+            </div>
+            <button>Arrendar</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="card-container">
+            <div class="card">
+                <img src="{% static 'core/assets/cementerio.jpg' %}" alt="Libro Ejemplo">
+            </div>
+            <div class="leyenda">
+                <p>Cementerio de animales</p>
+            </div>
+            <button>Arrendar</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="card-container">
+            <div class="card">
+                <img src="{% static 'core/assets/opera.jpg' %}" alt="Libro Ejemplo">
+            </div>
+            <div class="leyenda">
+                <p>Fantasma de la opera</p>
+            </div>
+            <button>Arrendar</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h2>Sobre Nosotros</h2>
+            <p>Somos una biblioteca municipal dedicada a promover la lectura y la cultura. Ofrecemos una amplia variedad de libros y recursos para toda la comunidad.</p>
+>>>>>>> e930610c6b9e80ef89e824e7ccd3e02a886dbc35
         </div>
 
         <div class="content">

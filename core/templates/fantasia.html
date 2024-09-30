@@ -8,6 +8,19 @@
     <title>Fantasía - Biblioteca</title>
     <link rel="stylesheet" href="{% static 'core/css/fantasia.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script>
+        function closeMessages() {
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const messageContainer = document.getElementById('messageContainer');
+    if (event.target === messageContainer) {
+        closeMessages();
+    }
+}
+    </script>
 </head>
 
 <body>
@@ -34,14 +47,16 @@
 
     <div class="container">
         {% if messages %}
-            <div class="messages">
-                <ul>
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+        <div class="messages" id="messageContainer">
+            <ul>
+                <li>
+                    <button class="close" onclick="closeMessages();">&times;</button>
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
     
 
         <div class="sidebar">
