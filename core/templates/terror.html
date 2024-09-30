@@ -8,6 +8,20 @@
     <title>Home - Biblioteca</title>
     <link rel="stylesheet" href="{% static 'core/css/terror.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script>
+        function closeMessages() {
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.style.display = 'none';
+}
+
+
+window.onclick = function(event) {
+    const messageContainer = document.getElementById('messageContainer');
+    if (event.target === messageContainer) {
+        closeMessages();
+    }
+}
+    </script>
 </head>
 
 <body>
@@ -31,6 +45,7 @@
         <div class="menu-toggle">☰</div>
     </nav>
 <div class="img"></div>
+
 
 <div class="container">
     <div class="sidebar">
