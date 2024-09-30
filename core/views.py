@@ -6,6 +6,18 @@ from .models import Libro, Categoria
 from django.http import JsonResponse
 from django.contrib.auth import logout
 
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render
+from .models import Libro, Categoria
+
+def is_superuser(user):
+    return user.is_superuser
+
+@user_passes_test(is_superuser, login_url='/login/')
+def usuarioAdmin(request):
+    libros = Libro.objects.select_related('id_categoria').all()
+    categorias = Categoria.objects.all()
+    return render(request, 'usuario-admin.html', {'libros': libros, 'categorias': categorias})
 
 
 def index(request):
@@ -80,10 +92,7 @@ def register(request):
 
     return render(request, 'register.html')
 
-def usuarioAdmin(request):
-    libros = Libro.objects.select_related('id_categoria').all()
-    categorias = Categoria.objects.all()
-    return render(request, 'usuario-admin.html', {'libros': libros, 'categorias': categorias})
+
 
 
 def agregar_libro(request):
