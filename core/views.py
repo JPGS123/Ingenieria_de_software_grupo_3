@@ -9,6 +9,18 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 
 
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render
+from .models import Libro, Categoria
+
+def is_superuser(user):
+    return user.is_superuser
+
+@user_passes_test(is_superuser, login_url='/login/')
+def usuarioAdmin(request):
+    libros = Libro.objects.select_related('id_categoria').all()
+    categorias = Categoria.objects.all()
+    return render(request, 'usuario-admin.html', {'libros': libros, 'categorias': categorias})
 
 
 def index(request):
@@ -80,10 +92,7 @@ def register(request):
 
     return render(request, 'register.html')
 
-def usuarioAdmin(request):
-    libros = Libro.objects.select_related('id_categoria').all()
-    categorias = Categoria.objects.all()
-    return render(request, 'usuario-admin.html', {'libros': libros, 'categorias': categorias})
+
 
 
 @login_required
@@ -226,11 +235,11 @@ def arrendar_libro(request, id_libro):
     return redirect('fantasia')
 
 
-
 @login_required
 def perfil_usuario(request):
-    arriendos = Arriendo.objects.filter(cliente=request.user).select_related('libro')
+    arriendos = Arriendo.objects.filter(libro__in=Libro.objects.all()).select_related('libro')
     return render(request, 'perfil.html', {'arriendos': arriendos})
+
 
 
 
