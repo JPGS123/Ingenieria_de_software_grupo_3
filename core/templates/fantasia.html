@@ -76,14 +76,19 @@ window.onclick = function(event) {
                 <div class="leyenda">
                     <p>{{ libro.titulo }}</p>
                 </div>
-                <a href="{% url 'arrendar_libro' id_libro=libro.id_libro %}">
-                    <button>Arrendar</button>
-                </a>                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'arrendar_libro' id_libro=libro.id_libro %}">
+                        <button>Arrendar</button>
+                    </a>
+                {% else %}
+                    <button disabled>Arrendar (Inicia sesión primero)</button>
+                {% endif %}
             </div>
             {% empty %}
             <p>No hay libros disponibles en la categoría de Fantasía.</p>
             {% endfor %}
         </div>
+        
     </div>
 
     <footer class="footer">

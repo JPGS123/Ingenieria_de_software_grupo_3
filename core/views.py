@@ -2,9 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Libro, Categoria
+from .models import Libro, Categoria, Arriendo
 from django.http import JsonResponse
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
+
 
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
@@ -22,9 +25,6 @@ def usuarioAdmin(request):
 
 def index(request):
     return render(request, 'index.html')
-
-def perfil(request):
-    return render(request, 'perfil.html')
 
 def terror(request):
     return render(request, 'terror.html')
@@ -95,6 +95,7 @@ def register(request):
 
 
 
+@login_required
 def agregar_libro(request):
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
@@ -213,17 +214,32 @@ def logout_view(request):
     messages.success(request, 'Sesión cerrada con éxito')
     return redirect('index')
 
+@login_required
 def arrendar_libro(request, id_libro):
     libro = get_object_or_404(Libro, id_libro=id_libro)
 
     if libro.copias > 0:
-        libro.copias -= 1 
+        libro.copias -= 1
         libro.save()
-        messages.success(request, 'Libro arrendado con éxito.')
+
+        try:
+            arriendo = Arriendo(libro=libro)
+            arriendo.save()
+            messages.success(request, 'Libro arrendado exitosamente.')
+        except IntegrityError as e:
+            print(f'Error al arrendar el libro: {str(e)}')
+            messages.error(request, 'Error al arrendar el libro. Por favor, inténtelo de nuevo más tarde.')
     else:
-        messages.error(request, 'No hay libros disponibles.')
+        messages.error(request, 'No hay libros disponibles para arrendar.')
 
     return redirect('fantasia')
+
+
+@login_required
+def perfil_usuario(request):
+    arriendos = Arriendo.objects.filter(libro__in=Libro.objects.all()).select_related('libro')
+    return render(request, 'perfil.html', {'arriendos': arriendos})
+
 
 
 
