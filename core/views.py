@@ -241,5 +241,10 @@ def perfil_usuario(request):
     return render(request, 'perfil.html', {'arriendos': arriendos})
 
 
+def categoria_terror(request):
+    libros_terror = Libro.objects.filter(id_categoria_id=2)
+    return render(request, 'terror.html', {'libros_terror': libros_terror})
+
+
 
 
