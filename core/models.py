@@ -19,11 +19,15 @@ class Libro(models.Model):
     año_publicacion = models.IntegerField()
     precio = models.DecimalField(max_digits=10, decimal_places=0)
     copias = models.IntegerField(default=0)
-    id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, db_column='ID_CATEGORIA')
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, db_column='ID_CATEGORIA', default=1)
 
     class Meta:
         db_table = 'LIBROS'
 
     def __str__(self):
         return self.titulo
+    
+
+
+
 

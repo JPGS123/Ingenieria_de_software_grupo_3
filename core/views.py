@@ -56,6 +56,7 @@ def register(request):
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()
         email = request.POST.get('email', '').strip()
+        telefono = request.POST.get('telefono', '').strip()
         password = request.POST.get('password', '').strip()
 
         if not username or not email or not password:
@@ -69,8 +70,13 @@ def register(request):
         if User.objects.filter(email=email).exists():
             messages.error(request, 'El correo ya está en uso.')
             return redirect('register')
+        
+        if User.objects.filter(first_name=telefono).exists():
+            messages.error(request, 'El teléfono ya está en uso.')
+            return redirect('register')
 
         user = User.objects.create_user(username=username, email=email, password=password)
+        user.first_name = telefono
         user.save()
         messages.success(request, 'Usuario registrado correctamente.')
         return redirect('login')

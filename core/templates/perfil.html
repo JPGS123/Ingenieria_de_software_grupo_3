@@ -1,72 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Biblioteca</title>
-    <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="{% static 'core/css/perfil.css' %}">
 </head>
-
 <body>
-    <nav class="navbar">
-        <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</div>
-        <ul class="nav-links">
-            <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
-            <li><a href="{% url 'eventos' %}">Eventos</a></li>
-            <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-            {% if user.is_authenticated %}
-            {% if user.is_superuser %}
-                <li><a href="{% url 'usuario-admin' %}">Admin Panel</a></li>
-            {% endif %}
-            <li><a href="{% url 'perfil' %}">Perfil</a></li>
-            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
-        {% else %}
-            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-        {% endif %}
-        </ul>
-        <div class="menu-toggle">☰</div>
-    </nav>
-
-    <div class="img"></div>
-
-    <p class= "parrafo-index">¡Bienvenido al sitio web de la Biblioteca Municipal de Chimbarongo, sucursal Peor es Nada!
-        Aquí encontrarás toda la información relevante sobre nuestro catálogo, los eventos y actividades
-        a realizar en nuestras dependencias, otros eventos que municipales que tengan lugar en Peor es Nada,
-        nuestros horarios de atención y todos los canales necesarios para contactarnos.
-        ¡Te esperamos!</p>
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section about">
-                <h2>Sobre Nosotros</h2>
-                <p>Somos una biblioteca municipal dedicada a promover la lectura y la cultura. Ofrecemos una amplia variedad de libros y recursos para toda la comunidad.</p>
-            </div>
-    
-            <div class="footer-section links">
-                <h2>Enlaces Rápidos</h2>
-                <ul>
-                    <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
-                    <li><a href="{% url 'eventos' %}">Eventos</a></li>
-                    <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
-                </ul>
-            </div>
-    
-            <div class="footer-section social">
-                <h2>Nuestro Horario</h2>
-                <ul>
-                    <p>Lunes 10:00 AM - 17:45 PM</p>
-                    <p>Martes a Viernes 9:00 AM - 17:45 PM</p>
-                </ul>
-            </div>
+    <div class="container">
+        <h1>Perfil de Usuario</h1>
+        <div class="profile-info">
+            <h2>Información Personal</h2>
+            <p><strong>Nombre:</strong> {{ user.username }}</p>
+            <p><strong>Teléfono:</strong> {{ user.first_name }}</p>
+            <p><strong>Correo:</strong> {{ user.email }}</p>
+            <p><strong>Libros arrendados:</strong> {{ user.libro }}</p>
         </div>
-    
-        <div class="footer-bottom">
-            <p>&copy; 2024 Biblioteca Municipal de Chimbarongo - Sede Peor es Nada | Todos los derechos reservados.</p>
-        </div>
-    </footer>
+        <a href="{% url 'index' %}">Volver a la página de inicio</a>
+    </div>
 </body>
-
 </html>
