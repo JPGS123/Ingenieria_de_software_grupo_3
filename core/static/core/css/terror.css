@@ -227,6 +227,8 @@ footer {
 .content {
     padding: 40px;
     text-align: center;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .card {
@@ -310,3 +312,17 @@ footer {
     z-index: 11;
 }
 
+.btn-arrendar {
+    background-color: #2C5364;
+    width: 100px;
+    height: 40px;
+    border-radius: 50px;
+    font-size: 100%;
+    color: #e3e3e3;
+    border: #2C5364;
+}
+
+.btn-arrendar:hover {
+    background-color: #5ea6c5;
+    color: #e3e3e3;
+}

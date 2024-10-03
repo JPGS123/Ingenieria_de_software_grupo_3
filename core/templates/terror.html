@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Biblioteca</title>
+    <title>Fantasía - Biblioteca</title>
     <link rel="stylesheet" href="{% static 'core/css/terror.css' %}">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <script>
@@ -14,7 +14,7 @@
             messageContainer.style.display = 'none';
         }
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             const messageContainer = document.getElementById('messageContainer');
             if (event.target === messageContainer) {
                 closeMessages();
@@ -31,49 +31,65 @@
             <li><a href="{% url 'eventos' %}">Eventos</a></li>
             <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
             {% if user.is_authenticated %}
-                {% if user.is_superuser %}
-                    <li><a href="{% url 'usuario-admin' %}">Panel administrador</a></li>
-                {% else %}
-                    <li><a href="{% url 'perfil' %}">Perfil</a></li>
-                {% endif %}
-                <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% if user.is_superuser %}
+            <li><a href="{% url 'usuario-admin' %}">Panel administrador</a></li>
             {% else %}
-                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            <li><a href="{% url 'perfil' %}">Perfil</a></li>
+            {% endif %}
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
             {% endif %}
         </ul>
         <div class="menu-toggle">☰</div>
     </nav>
-
     <div class="img"></div>
 
     <div class="container">
+        {% if messages %}
+        <div class="messages" id="messageContainer">
+            <ul>
+                <li>
+                    <button class="close" onclick="closeMessages();">&times;</button>
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+
         <div class="sidebar">
             <h2>Terror</h2>
             <h1>Categorías:</h1>
             <a href="{% url 'ciencia-ficcion' %}">Ciencia Ficción</a>
+            <a href="{% url 'fantasia' %}">Fantasia</a>
             <a href="{% url 'cuentos' %}">Cuentos</a>
-            <a href="{% url 'fantasia' %}">Fantasía</a>
         </div>
 
         <div class="content">
-            {% for libro in libros_terror %}
+            {% for libro in libros %}
             <div class="card-container">
                 <div class="card">
-                    <img src="{% static 'core/assets/default.jpg' %}" alt="{{ libro.titulo }}">
+                    {% if libro.imagen %}
+                        <img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}">
+                    {% else %}
+                        <img src="{% static 'core/assets/placeholder.jpg' %}" alt="Imagen no disponible">
+                    {% endif %}
                 </div>
                 <div class="leyenda">
                     <p>{{ libro.titulo }}</p>
                 </div>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'arrendar_libro' id_libro=libro.id_libro %}">
-                        <button>Arrendar</button>
-                    </a>
+                <a href="{% url 'arrendar_libro' id_libro=libro.id_libro %}">
+                    <button class="btn-arrendar">Arrendar</button>
+                </a>
                 {% else %}
-                    <button disabled>Arrendar (Inicia sesión primero)</button>
+                <button disabled>Arrendar (Inicia sesión primero)</button>
                 {% endif %}
             </div>
             {% empty %}
-            <p>No hay libros disponibles en la categoría de Terror.</p>
+            <p>No hay libros disponibles en la categoría de Fantasía.</p>
             {% endfor %}
         </div>
     </div>

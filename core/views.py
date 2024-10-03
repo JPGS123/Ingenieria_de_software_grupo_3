@@ -28,13 +28,16 @@ def index(request):
     return render(request, 'index.html')
 
 def terror(request):
-    return render(request, 'terror.html')
+    libros = Libro.objects.filter(id_categoria_id=2)
+    return render(request, 'terror.html', {'libros': libros})
 
 def cuentos(request):
-    return render(request, 'cuentos.html')
+    libros = Libro.objects.filter(id_categoria_id=3)
+    return render(request, 'cuentos.html', {'libros': libros})
 
 def cienciaFiccion(request):
-    return render(request, 'ciencia-ficcion.html')
+    libros = Libro.objects.filter(id_categoria_id=1)
+    return render(request, 'ciencia-ficcion.html', {'libros': libros})
 
 def eventos(request):
     return render(request, 'eventos.html')
@@ -56,7 +59,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            request.session.set_expiry(300)  # La sesión expirará en 10 minutos de inactividad
+            request.session.set_expiry(3000) 
             return redirect('index')
         else:
             messages.error(request, 'Usuario o contraseña incorrectos')
@@ -256,9 +259,6 @@ def perfil_usuario(request):
 
     return render(request, 'perfil.html', {'arriendos': arriendos_unicos})
 
-def categoria_terror(request):
-    libros_terror = Libro.objects.filter(id_categoria_id=2)
-    return render(request, 'terror.html', {'libros_terror': libros_terror})
 
 
 
