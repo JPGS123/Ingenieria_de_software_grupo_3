@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import usuarioAdmin, index, eventos, login_page, login_view, catalogo, register, nosotros, usuarioAdmin, agregar_libro, eliminar_libro, editar_libro, cienciaFiccion, fantasia, categoria_terror, cuentos, lista_categorias, agregar_categoria, editar_categoria, eliminar_categoria, logout_view, perfil_usuario, arrendar_libro
 
 urlpatterns = [
@@ -25,4 +27,4 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('perfil/', perfil_usuario, name='perfil'),
     path('arrendar/<int:id_libro>/', arrendar_libro, name='arrendar_libro'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

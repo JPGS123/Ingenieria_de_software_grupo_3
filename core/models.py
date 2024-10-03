@@ -21,6 +21,7 @@ class Libro(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=0)
     copias = models.IntegerField(default=0)
     id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, db_column='ID_CATEGORIA', default=1)
+    imagen = models.ImageField(upload_to='imagenes/', blank=True, null=True)
 
     class Meta:
         db_table = 'LIBROS'

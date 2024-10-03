@@ -10,23 +10,22 @@
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <script>
         function closeMessages() {
-    const messageContainer = document.getElementById('messageContainer');
-    messageContainer.style.display = 'none';
-}
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.style.display = 'none';
+        }
 
-
-window.onclick = function(event) {
-    const messageContainer = document.getElementById('messageContainer');
-    if (event.target === messageContainer) {
-        closeMessages();
-    }
-}
+        window.onclick = function(event) {
+            const messageContainer = document.getElementById('messageContainer');
+            if (event.target === messageContainer) {
+                closeMessages();
+            }
+        }
     </script>
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</div>
+        <div class="titulo"><a href="/">Biblioteca Municipal de Chimbarongo - Sede Peor es Nada</a></div>
         <ul class="nav-links">
             <li><a href="{% url 'catalogo' %}">Cátalogo</a></li>
             <li><a href="{% url 'eventos' %}">Eventos</a></li>
@@ -44,13 +43,13 @@ window.onclick = function(event) {
         </ul>
         <div class="menu-toggle">☰</div>
     </nav>
-    
+
     <div class="img"></div>
 
     <div class="container">
         <div class="sidebar">
             <h2>Terror</h2>
-            <h1>Categorias:</h1>
+            <h1>Categorías:</h1>
             <a href="{% url 'ciencia-ficcion' %}">Ciencia Ficción</a>
             <a href="{% url 'cuentos' %}">Cuentos</a>
             <a href="{% url 'fantasia' %}">Fantasía</a>
@@ -77,7 +76,6 @@ window.onclick = function(event) {
             <p>No hay libros disponibles en la categoría de Terror.</p>
             {% endfor %}
         </div>
-        
     </div>
 
     <footer class="footer">

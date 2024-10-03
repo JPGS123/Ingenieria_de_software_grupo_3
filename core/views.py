@@ -7,11 +7,8 @@ from django.http import JsonResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-
-
 from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import render
-from .models import Libro, Categoria
+from django.core.files.storage import default_storage
 
 def is_superuser(user):
     return user.is_superuser
@@ -20,6 +17,10 @@ def is_superuser(user):
 def usuarioAdmin(request):
     libros = Libro.objects.select_related('id_categoria').all()
     categorias = Categoria.objects.all()
+    for libro in libros:
+        if not libro.imagen:
+            libro.imagen = 'media/imagenes/default.jpg'
+    
     return render(request, 'usuario-admin.html', {'libros': libros, 'categorias': categorias})
 
 
@@ -93,23 +94,25 @@ def register(request):
     return render(request, 'register.html')
 
 
-
-
 @login_required
 def agregar_libro(request):
     if request.method == 'POST':
-        titulo = request.POST.get('titulo')
-        autor = request.POST.get('autor')
-        año_publicacion = request.POST.get('año_publicacion')
-        precio = request.POST.get('precio')
-        copias = request.POST.get('copias')
-        id_categoria = request.POST.get('categoria')
+        titulo = request.POST.get('titulo').strip()
+        autor = request.POST.get('autor').strip()
+        año_publicacion = request.POST.get('año_publicacion').strip()
+        precio = request.POST.get('precio').strip()
+        copias = request.POST.get('copias').strip()
+        id_categoria = request.POST.get('categoria').strip()
+        imagen = request.FILES.get('imagen')
+
         if not titulo or not autor or not año_publicacion or not precio or not copias or not id_categoria:
             return JsonResponse({'status': 'error', 'message': 'Todos los campos son obligatorios'}, status=400)
+
         try:
             año_publicacion = int(año_publicacion)
             copias = int(copias)
             precio = float(precio)
+
             categoria = Categoria.objects.get(id_categoria=id_categoria)
             
             libro = Libro(
@@ -118,19 +121,24 @@ def agregar_libro(request):
                 año_publicacion=año_publicacion,
                 precio=precio,
                 copias=copias,
-                id_categoria=categoria
+                id_categoria=categoria,
+                imagen=imagen if imagen else None
             )
             libro.save()
             return JsonResponse({'status': 'success'})
-        except ValueError as ve:
+        
+        except ValueError:
             return JsonResponse({'status': 'error', 'message': 'Datos numéricos inválidos'}, status=400)
+        
         except Categoria.DoesNotExist:
             return JsonResponse({'status': 'error', 'message': 'Categoría no encontrada'}, status=400)
+
         except Exception as e:
             print(f"Error al agregar libro: {str(e)}")
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+            return JsonResponse({'status': 'error', 'message': 'Ocurrió un error inesperado'}, status=500)
 
     return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
+
 
 
 def eliminar_libro(request, id_libro):

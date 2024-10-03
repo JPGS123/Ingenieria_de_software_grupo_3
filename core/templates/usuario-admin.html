@@ -11,6 +11,11 @@
             display: none;
             margin-top: 10px;
         }
+        .book-image {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -31,6 +36,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Imagen</th>
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Año de Publicación</th>
@@ -43,6 +49,13 @@
             <tbody>
                 {% for libro in libros %}
                 <tr>
+                    <td>
+                        {% if libro.imagen %}
+                            <img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}" class="book-image">
+                        {% else %}
+                            Sin imagen
+                        {% endif %}
+                    </td>
                     <td>{{ libro.titulo }}</td>
                     <td>{{ libro.autor }}</td>
                     <td>{{ libro.año_publicacion }}</td>
@@ -56,13 +69,13 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="#" class="btn" onclick="openEditModal('{{ libro.id_libro }}', '{{ libro.titulo }}', '{{ libro.autor }}', '{{ libro.año_publicacion }}', '{{ libro.precio }}', '{{ libro.copias }}', '{{ libro.id_categoria.id_categoria }}')">Editar</a>
+                        <a href="#" class="btn" onclick="openEditModal('{{ libro.id_libro }}', '{{ libro.titulo }}', '{{ libro.autor }}', '{{ libro.año_publicacion }}', '{{ libro.precio }}', '{{ libro.copias }}', '{{ libro.id_categoria.id_categoria }}', '{{ libro.imagen.url }}')">Editar</a>
                         <a href="#" class="btn eliminar" data-id="{{ libro.id_libro }}">Eliminar</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="7">No hay libros disponibles.</td>
+                    <td colspan="8">No hay libros disponibles.</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -73,7 +86,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeAddModal()">&times;</span>
             <h2>Agregar Nuevo Libro</h2>
-            <form id="addBookForm" method="post">
+            <form id="addBookForm" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required>
@@ -85,7 +98,10 @@
                 <input type="number" id="precio" name="precio" required step="0.01">
                 <label for="copias">Copias:</label>
                 <input type="number" id="copias" name="copias" required>
-
+                
+                <label for="imagen">Imagen del Libro:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/*">
+                
                 <button type="button" id="toggleCategorias">Seleccionar Categoría</button>
                 <div class="toggle-categorias" id="categoriasContainer">
                     <label for="categoria">Categoría:</label>
@@ -106,7 +122,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeEditModal()">&times;</span>
             <h2>Editar Libro</h2>
-            <form id="editBookForm" method="post">
+            <form id="editBookForm" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" id="edit_libro_id" name="libro_id">
                 <label for="edit_titulo">Título:</label>
@@ -120,6 +136,10 @@
                 <label for="edit_copias">Copias:</label>
                 <input type="number" id="edit_copias" name="copias" required>
 
+                <label for="edit_imagen">Cambiar Imagen del Libro:</label>
+                <input type="file" id="edit_imagen" name="imagen" accept="image/*">
+                <img id="currentImage" class="book-image" alt="Imagen del Libro">
+                
                 <button type="button" id="toggleCategoriasEdit">Seleccionar Categoría</button>
                 <div class="toggle-categorias" id="categoriasContainerEdit">
                     <label for="edit_categoria">Categoría:</label>
@@ -206,26 +226,22 @@
                             alert('Libro eliminado correctamente');
                             location.reload();
                         } else {
-                            response.json().then(data => {
-                                alert(`Error al eliminar el libro: ${data.message}`);
-                            });
+                            alert('Error al eliminar el libro');
                         }
-                    })
-                    .catch(error => {
-                        alert('Error al realizar la solicitud: ' + error);
                     });
                 }
-            };
+            }
         });
 
-        function openEditModal(id, titulo, autor, año_publicacion, precio, copias, categoriaId) {
+        function openEditModal(id, titulo, autor, añoPublicacion, precio, copias, categoriaId, imagenUrl) {
             document.getElementById('edit_libro_id').value = id;
             document.getElementById('edit_titulo').value = titulo;
             document.getElementById('edit_autor').value = autor;
-            document.getElementById('edit_año_publicacion').value = año_publicacion;
+            document.getElementById('edit_año_publicacion').value = añoPublicacion;
             document.getElementById('edit_precio').value = precio;
             document.getElementById('edit_copias').value = copias;
-            document.getElementById('edit_categoria').value = categoriaId;
+            document.getElementById('edit_categoria').value = categoriaId || '';
+            document.getElementById('currentImage').src = imagenUrl || '';
 
             document.getElementById('editBookModal').style.display = 'block';
         }
@@ -235,7 +251,7 @@
             const formData = new FormData(this);
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-            fetch(`/editar-libro/${document.getElementById('edit_libro_id').value}/`, {
+            fetch('/editar-libro/', {
                 method: 'POST',
                 body: formData,
                 headers: {
