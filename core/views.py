@@ -55,11 +55,11 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
+            request.session.set_expiry(300)  # La sesión expirará en 10 minutos de inactividad
             return redirect('index')
         else:
             messages.error(request, 'Usuario o contraseña incorrectos')
-
-    return redirect('login')
+    return render(request, 'login.html')
 
 def register(request):
     if request.method == 'POST':
@@ -238,8 +238,15 @@ def arrendar_libro(request, id_libro):
 @login_required
 def perfil_usuario(request):
     arriendos = Arriendo.objects.filter(libro__in=Libro.objects.all()).select_related('libro')
-    return render(request, 'perfil.html', {'arriendos': arriendos})
 
+    libros_vistos = set()
+    arriendos_unicos = []
+    for arriendo in arriendos:
+        if arriendo.libro.id_libro not in libros_vistos:
+            libros_vistos.add(arriendo.libro.id_libro)
+            arriendos_unicos.append(arriendo)
+
+    return render(request, 'perfil.html', {'arriendos': arriendos_unicos})
 
 
 

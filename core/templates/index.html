@@ -38,6 +38,12 @@
         nuestros horarios de atención y todos los canales necesarios para contactarnos.
         ¡Te esperamos!</p>
 
+    <script>
+        window.addEventListener('beforeunload', function(event) {
+            navigator.sendBeacon("{% url 'logout' %}");
+        });
+    </script>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-section about">
