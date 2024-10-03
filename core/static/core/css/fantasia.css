@@ -325,17 +325,20 @@ footer {
 
 .btn-arrendar {
     background-color: #2C5364;
-    width: 100px;
-    height: 40px;
     border-radius: 50px;
     font-size: 100%;
     color: #e3e3e3;
-    border: #2C5364;
+    border: 2px solid #2C5364;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
 }
 
 .btn-arrendar:hover {
     background-color: #5ea6c5;
     color: #e3e3e3;
+    border: 2px solid #5ea6c5;
 }
-
 

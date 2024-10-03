@@ -243,7 +243,7 @@ def arrendar_libro(request, id_libro):
     else:
         messages.error(request, 'No hay libros disponibles para arrendar.')
 
-    return redirect('fantasia')
+    return redirect('catalogo')
 
 
 @login_required
